@@ -4,7 +4,8 @@
   "scripts": {
     "dist": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
     "prepare": "npm run dist",
-    "update": "npm install -g generator-joplin && yo joplin --update"
+    "update": "npm install -g generator-joplin && yo joplin --update",
+    "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\""
   },
   "license": "MIT",
   "keywords": [
@@ -14,7 +15,7 @@
     "publish"
   ],
   "devDependencies": {
-    "@types/node": "^18.11.18",
+    "@types/node": "^14.0.14",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^6.1.0",
     "fs-extra": "^9.0.1",

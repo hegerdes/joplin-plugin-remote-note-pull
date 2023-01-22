@@ -1,7 +1,7 @@
 import * as http from 'https';
 
 // Helper request function
-export function makeRequest(url, options={}) {
+export const makeRequest = async (url, options={}) => {
     return new Promise((resolve, reject) => {
     const req = http.request(url, options, (res) => {
       let chunks = [];
