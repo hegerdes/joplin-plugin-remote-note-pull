@@ -2,9 +2,11 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - ${{ github.event.repository.default_branch }}
   pull_request:
-    branches: [ main ]
+    branches:
+      - ${{ github.event.repository.default_branch }}
 
 jobs:
   build:
