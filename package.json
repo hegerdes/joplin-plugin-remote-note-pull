@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "dist": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
-    "test-compile": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
+    "test-compile": "npm run build",
     "update": "npm install -g generator-joplin && yo joplin --update",
+    "build": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
     "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\""
   },
   "license": "MIT",
