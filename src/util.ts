@@ -47,19 +47,31 @@ export const create_notebook_form_option = async () => {
 };
 
 // Get all notes
-export const get_all_notes = async () => {
+export const get_all_notes = async ():Promise<Map<String,Object>> => {
   let notes = new Map<string, Object>();
   let pageNum = 1;
-  let data = await joplin.data.get(
-    ["notes"],
-    `limit=${notes_query_limit}&page=${pageNum}`
-  );
+  let query_fields = ['id', 'title', 'body', 'source_url']
+  let data = await joplin.data.get(["notes"],{ fields: query_fields, limit: notes_query_limit, page: pageNum });
   data.items.forEach((entry) => notes.set(entry.id, entry));
   while (data.has_more) {
     pageNum++;
-    console.log(`limit=${notes_query_limit}&page=${pageNum}`);
-    data = await joplin.data.get(["notes"]);
+    let data = await joplin.data.get(["notes"],{ fields: query_fields, limit: notes_query_limit, page: pageNum });
     data.items.forEach((entry) => notes.set(entry.id, entry));
   }
   return notes;
 };
+
+
+export const patchMDLinks = (payload, base_url, matches, splitter, stater):string => {
+  if(matches){
+      for(let match of matches){
+          let splitted = match.trim().split(splitter)
+          console.log(splitted)
+          if(splitted.length == 2 && !splitted[1].startsWith(stater)){
+              payload = payload.replace(match, splitted[0] + splitter + base_url + splitted[1]);
+          }
+      }
+  }
+  return payload
+}
+
