@@ -7,6 +7,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -36,12 +38,10 @@ jobs:
         path: publish
 
     - name: Create release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: true
+        name: Release ${{ github.ref }}
+        generate_release_notes: true
         prerelease: false
-        artifacts: joplin-plugin-remote-note-pull.zip
+        files: joplin-plugin-remote-note-pull.zip
+        token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
