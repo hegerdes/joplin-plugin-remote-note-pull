@@ -44,4 +44,4 @@ jobs:
         generate_release_notes: true
         prerelease: false
         files: joplin-plugin-remote-note-pull.zip
-        token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
