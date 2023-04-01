@@ -14,8 +14,6 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
-    env:
-      NODE_OPTIONS: --openssl-legacy-provider
 
     steps:
       - name: Checkout Code
@@ -27,7 +25,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install packages
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: npm ci
 
       - name: Test compile
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
         run: npm run test-compile
