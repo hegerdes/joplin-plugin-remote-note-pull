@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Plugin Test Build
 
 on:
   push:
@@ -9,17 +9,25 @@ on:
       - master
 
 jobs:
-  build:
+  test-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
+    env:
+      NODE_OPTIONS: --openssl-legacy-provider
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run test-compile
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Test compile
+        run: npm run test-compile

@@ -1,11 +1,11 @@
-name: Release
+name: Create Release
 on:
   push:
     tags:
       - "v*"
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -14,12 +14,14 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 14.x
+        node-version: 16.x
 
     - name: Install dependencies
       run: npm ci
 
     - name: Build app
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
       run: npm run build
 
     - name: Create release
