@@ -1,12 +1,14 @@
 {
-  "name": "joplin-plugin-remotemarkdownsync",
+  "name": "joplin-plugin-remote-note-pull",
   "version": "1.0.0",
   "scripts": {
-    "dist": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
+    "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
+    "dist-legacy-ssl": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
     "test-compile": "npm run build",
     "update": "npm install -g generator-joplin && yo joplin --update",
     "build": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
-    "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\""
+    "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
+    "dev-legacy-ssl": "npm run dist-legacy-ssl && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\""
   },
   "license": "MIT",
   "keywords": [
