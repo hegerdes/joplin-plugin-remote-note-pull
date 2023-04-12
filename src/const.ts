@@ -1,4 +1,5 @@
-export const default_sync_interval = 1800000;
+export const default_sync_interval = 30;
+export const min_to_ms = 60000;
 export const notes_query_limit = 25;
 export const DEBUG = true;
 export const http_options = { method: "GET" };

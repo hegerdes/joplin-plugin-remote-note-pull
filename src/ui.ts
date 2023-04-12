@@ -4,7 +4,7 @@ import {
   SettingItemType,
   ToolbarButtonLocation,
 } from "api/types";
-import { default_sync_interval } from "./const";
+import { default_sync_interval, min_to_ms } from "./const";
 import { createNotebookList, setDialogHTML } from "./util";
 import { updateNotes } from "./notes";
 
@@ -13,9 +13,9 @@ let joplin_md_pull_sync_interval: NodeJS.Timer;
 let interval;
 
 export const createSettings = async () => {
-  let notesbooks_map = await createNotebookList();
+  let notebooks_map = await createNotebookList();
   await joplin.settings.registerSettings({
-    joplin_md_pull_sync_enabeld: {
+    joplin_md_pull_sync_enabled: {
       value: true,
       type: SettingItemType.Bool,
       section: "joplin_md_pull_setting",
@@ -25,27 +25,27 @@ export const createSettings = async () => {
     joplin_md_pull_sync_interval: {
       value: default_sync_interval,
       type: SettingItemType.Int,
-      minimum: 300,
+      minimum: 5,
       section: "joplin_md_pull_setting",
       public: true,
-      label: "Sync interval",
+      label: "Sync interval - in min",
     },
     joplin_md_pull_default_notebook: {
-      value: Object.keys(notesbooks_map)[0],
+      value: Object.keys(notebooks_map)[0],
       type: SettingItemType.String,
       section: "joplin_md_pull_setting",
       isEnum: true,
       public: true,
       label: "Select default notebook",
-      options: notesbooks_map,
+      options: notebooks_map,
     },
   });
 
   interval =
     Number(await joplin.settings.value("joplin_md_pull_sync_interval")) ||
     default_sync_interval;
-  if (await joplin.settings.value("joplin_md_pull_sync_enabeld")) {
-    joplin_md_pull_sync_interval = setInterval(updateNotes, interval);
+  if (await joplin.settings.value("joplin_md_pull_sync_enabled")) {
+    joplin_md_pull_sync_interval = setInterval(updateNotes, interval * min_to_ms);
   }
 };
 
@@ -87,23 +87,23 @@ export const updateSettings = async (event) => {
   for (const item of event.keys) {
     switch (item) {
       case "joplin_md_pull_sync_interval":
-        if (await joplin.settings.value("joplin_md_pull_sync_enabeld")) {
-          console.debug("Setting new interval");
+        if (await joplin.settings.value("joplin_md_pull_sync_enabled")) {
           clearInterval(joplin_md_pull_sync_interval);
           interval =
-            Number(
-              await joplin.settings.value("joplin_md_pull_sync_interval")
+          Number(
+            await joplin.settings.value("joplin_md_pull_sync_interval")
             ) || default_sync_interval;
-          joplin_md_pull_sync_interval = setInterval(updateNotes, interval);
+            console.debug(`Setting new interval to ${interval}m (${interval * min_to_ms})`);
+          joplin_md_pull_sync_interval = setInterval(updateNotes, interval * min_to_ms);
         }
         break;
-      case "joplin_md_pull_sync_enabeld":
+      case "joplin_md_pull_sync_enabled":
         console.debug(
           "Toggle Sync to: " +
-            (await joplin.settings.value("joplin_md_pull_sync_enabeld"))
+            (await joplin.settings.value("joplin_md_pull_sync_enabled"))
         );
         clearInterval(joplin_md_pull_sync_interval);
-        if (await joplin.settings.value("joplin_md_pull_sync_enabeld")) {
+        if (await joplin.settings.value("joplin_md_pull_sync_enabled")) {
           interval =
             Number(
               await joplin.settings.value("joplin_md_pull_sync_interval")
@@ -117,7 +117,7 @@ export const updateSettings = async (event) => {
             (await joplin.settings.value("joplin_md_pull_default_notebook")) +
             " as the default notebook"
         );
-        await setDialogHTML(newNoteDialog);
+        await setDialogHTML(await getNoteDialog());
         break;
       default:
     }

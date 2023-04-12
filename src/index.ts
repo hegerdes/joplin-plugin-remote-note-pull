@@ -26,15 +26,15 @@ joplin.plugins.register({
     // When settings change
     joplin.settings.onChange(updateSettings);
 
-    // This event will be triggered when the content of the note changes
-    await joplin.workspace.onNoteChange(async () => {
-      await setDialogHTML(await getNoteDialog());
-    });
+    // // This event will be triggered when the content of the note changes
+    // await joplin.workspace.onNoteChange(async () => {
+    //   await setDialogHTML(await getNoteDialog());
+    // });
 
-    // This event will be triggered when the user selects a different note
-    await joplin.workspace.onNoteSelectionChange(async () => {
-      await setDialogHTML(await getNoteDialog());
-    });
+    // // This event will be triggered when the user selects a different note
+    // await joplin.workspace.onNoteSelectionChange(async () => {
+    //   await setDialogHTML(await getNoteDialog());
+    // });
 
     console.info("Plugin loaded");
   },
