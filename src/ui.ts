@@ -28,7 +28,7 @@ export const createSettings = async () => {
       minimum: 5,
       section: "joplin_md_pull_setting",
       public: true,
-      label: "Sync interval - in min",
+      label: "Sync interval (in minutes)",
     },
     joplin_md_pull_default_notebook: {
       value: Object.keys(notebooks_map)[0],

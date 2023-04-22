@@ -9,22 +9,27 @@ const html_link_regex = /<img [^>]*src="[^"]*"[^>]*>/g;
 
 // Create a new sync note
 export const createNote = async (url: string, notebook: string) => {
-  let res = (await makeRequest(url, http_options)).toString();
-  console.debug("Made web request");
-  let body = await createBody(res, url);
-  console.debug("Created Body");
-  let title = await createTitle(res);
-  console.debug("Created Title");
+  try {
+    let res = (await makeRequest(url, http_options)).toString();
+    console.debug("Made web request");
+    let body = await createBody(res, url);
+    console.debug("Created Body");
+    let title = await createTitle(res);
+    console.debug("Created Title");
 
-  let post_res = await joplin.data.post(["notes"], null, {
-    body: body,
-    title: title,
-    parent_id: notebook,
-    source_url: url,
-  });
+    let post_res = await joplin.data.post(["notes"], null, {
+      body: body,
+      title: title,
+      parent_id: notebook,
+      source_url: url,
+    });
 
-  console.debug("New Note", post_res);
-  alert("New Sync Note Created");
+    console.debug("New Note", post_res);
+    alert("New Sync Note Created");
+  } catch (err) {
+    console.error("Error while creating node: ", err);
+    alert(`Unable to create new note!\nError: ${err.message}\n\nIf this is a issue with the plugin feel free to open a issue on: https://github.com/hegerdes/joplin-plugin-remote-note-pull`);
+  }
 };
 
 // Generate title
