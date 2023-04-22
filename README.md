@@ -1,6 +1,6 @@
 # Joplin Plugin Remote Note Pull
 
-[![Plugin Test Build](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/Plugin-Test.yml/badge.svg)](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/Plugin-Test.yml) [![Create Release](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/Release.yml/badge.svg?event=release)](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/Release.yml)
+[![Plugin Test Build](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/test-compile.yml/badge.svg)](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/test-compile.yml) [![GitHub issues](https://img.shields.io/github/issues/hegerdes/joplin-plugin-remote-note-pull.svg)](https://GitHub.com/hegerdes/joplin-plugin-remote-note-pull/issues/) [![GitHub release](https://img.shields.io/github/release/hegerdes/joplin-plugin-remote-note-pull.svg)](https://GitHub.com/hegerdes/joplin-plugin-remote-note-pull/releases/)
 
 This plugin allows websites to be saved as notes and updated periodically based on the original website URL.
 
