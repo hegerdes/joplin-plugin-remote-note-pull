@@ -9,7 +9,6 @@
 const path = require('path');
 const crypto = require('crypto');
 const fs = require('fs-extra');
-const chalk = require('chalk');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackOnBuildPlugin = require('on-build-webpack');
 const tar = require('tar');
@@ -37,15 +36,15 @@ const pluginInfoFilePath = path.resolve(publishDir, `${manifest.id}.json`);
 function validatePackageJson() {
 	const content = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 	if (!content.name || content.name.indexOf('joplin-plugin-') !== 0) {
-		console.warn(chalk.yellow(`WARNING: To publish the plugin, the package name should start with "joplin-plugin-" (found "${content.name}") in ${packageJsonPath}`));
+		console.warn(`WARNING: To publish the plugin, the package name should start with "joplin-plugin-" (found "${content.name}") in ${packageJsonPath}`);
 	}
 
 	if (!content.keywords || content.keywords.indexOf('joplin-plugin') < 0) {
-		console.warn(chalk.yellow(`WARNING: To publish the plugin, the package keywords should include "joplin-plugin" (found "${JSON.stringify(content.keywords)}") in ${packageJsonPath}`));
+		console.warn(`WARNING: To publish the plugin, the package keywords should include "joplin-plugin" (found "${JSON.stringify(content.keywords)}") in ${packageJsonPath}`);
 	}
 
 	if (content.scripts && content.scripts.postinstall) {
-		console.warn(chalk.yellow(`WARNING: package.json contains a "postinstall" script. It is recommended to use a "prepare" script instead so that it is executed before publish. In ${packageJsonPath}`));
+		console.warn(`WARNING: package.json contains a "postinstall" script. It is recommended to use a "prepare" script instead so that it is executed before publish. In ${packageJsonPath}`);
 	}
 }
 
@@ -58,12 +57,12 @@ function currentGitInfo() {
 	try {
 		let branch = execSync('git rev-parse --abbrev-ref HEAD', { stdio: 'pipe' }).toString().trim();
 		const commit = execSync('git rev-parse HEAD', { stdio: 'pipe' }).toString().trim();
-		if (branch === 'HEAD') branch = 'master';
+		if (branch === 'HEAD') branch = 'main';
 		return `${branch}:${commit}`;
 	} catch (error) {
 		const messages = error.message ? error.message.split('\n') : [''];
-		console.info(chalk.cyan('Could not get git commit (not a git repo?):', messages[0].trim()));
-		console.info(chalk.cyan('Git information will not be stored in plugin info file'));
+		console.info('Could not get git commit (not a git repo?):', messages[0].trim());
+		console.info('Git information will not be stored in plugin info file');
 		return '';
 	}
 }
@@ -102,7 +101,7 @@ function createPluginArchive(sourceDir, destPath) {
 		distFiles
 	);
 
-	console.info(chalk.cyan(`Plugin archive has been created in ${destPath}`));
+	console.info(`Plugin archive has been created in ${destPath}`);
 }
 
 function createPluginInfo(manifestPath, destPath, jplFilePath) {
@@ -120,7 +119,7 @@ function onBuildCompleted() {
 		createPluginInfo(manifestPath, pluginInfoFilePath, pluginArchiveFilePath);
 		validatePackageJson();
 	} catch (error) {
-		console.error(chalk.red(error.message));
+		console.error(error.message);
 	}
 }
 
@@ -278,7 +277,7 @@ let exportedConfigs = [];
 try {
 	exportedConfigs = main(process.argv);
 } catch (error) {
-	console.error(chalk.red(error.message));
+	console.error(error.message);
 	process.exit(1);
 }
 
