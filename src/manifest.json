@@ -2,12 +2,12 @@
 	"manifest_version": 1,
 	"id": "github.hegerdes.joplin_remote_note_pull",
 	"app_min_version": "2.8",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"name": "Remote-Note-Pull",
 	"description": "This Plugin will periodically pull public available Markdown documents into your notebook and keeps them up to date",
 	"author": "hegerdes",
 	"homepage_url": "https://github.com/hegerdes/joplin-plugin-remote-note-pull",
 	"repository_url": "https://github.com/hegerdes/joplin-plugin-remote-note-pull",
 	"keywords": ["joplin", "nodejs", "markdown", "sync"],
-	"categories": []
+	"categories": ["personal knowledge management", "productivity"]
 }
