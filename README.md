@@ -27,7 +27,8 @@ Enter a URL and wait some second. The newly created note will be periodically up
 
 ![New Note Option Dialog](docs/images/new_note_dialog.png)
 
-You can change the default interval via the Joplin settings. A new option group will be added on plugin install. It allows you to enable the sync feature, sets the sync interval and the default target notebook.
+You can change the default interval via the Joplin settings. A new option group will be added on plugin install. It allows you to enable the sync feature, sets the sync interval and the default target notebook.  
+With the *DownArrow* Icon in the top left you can also trigger a manual update in any currently selected sync-note.
 
 ![Settings Dialog](docs/images/settings.png)
 
@@ -39,6 +40,8 @@ Clone the repo and open it in your favourite editor. The most important files ar
 
 - `/src/index.ts`, which contains the entry point for the plugin source code.
 - `/src/manifest.json`, which is the plugin manifest. It contains information such as the plugin a name, version, etc.
+
+See here for information about publishing [Joplin Forum](https://discourse.joplinapp.org/t/plugins-multiple-questions-sharing-publishing-etc/30551)
 
 ## Building the plugin
 
