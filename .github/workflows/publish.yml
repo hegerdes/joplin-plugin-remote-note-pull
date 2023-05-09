@@ -1,8 +1,11 @@
-name: Create Release
+name: Create Release & Publish Package to npmjs
 on:
   push:
     tags:
       - "v*"
+
+env:
+  NODE_VERSION: 18
 
 jobs:
   release:
@@ -16,7 +19,12 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: "16"
+        node-version: "{{ env.NODE_VERSION }}"
+
+    - name: Set Version
+      run: |
+        npm version --no-commit-hooks --allow-same-version --no-git-tag-version ${{ github.ref_name }}
+        npm version
 
     - name: Install dependencies
       run: npm install
@@ -37,7 +45,7 @@ jobs:
         filename: joplin-plugin-remote-note-pull.zip
         path: publish
 
-    - name: Create release
+    - name: Create GH release
       uses: softprops/action-gh-release@v1
       with:
         name: Release ${{ github.ref }}
@@ -45,3 +53,8 @@ jobs:
         prerelease: false
         files: joplin-plugin-remote-note-pull.zip
         token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push npm package
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
