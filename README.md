@@ -41,7 +41,8 @@ Clone the repo and open it in your favourite editor. The most important files ar
 - `/src/index.ts`, which contains the entry point for the plugin source code.
 - `/src/manifest.json`, which is the plugin manifest. It contains information such as the plugin a name, version, etc.
 
-See here for information about publishing [Joplin Forum](https://discourse.joplinapp.org/t/plugins-multiple-questions-sharing-publishing-etc/30551)
+See here for information about publishing [Joplin Forum](https://discourse.joplinapp.org/t/plugins-multiple-questions-sharing-publishing-etc/30551)  
+For mor€information see [here](https://github.com/laurent22/joplin/tree/dev/packages/generator-joplin#publishing-the-plugin)
 
 ## Building the plugin
 

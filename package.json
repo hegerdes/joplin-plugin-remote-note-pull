@@ -6,8 +6,7 @@
   "keywords": ["joplin-plugin"],
   "files": ["publish"],
   "author": {
-    "name" : "Henrik Gerdes",
-    "email" : "b@rubble.com",
+    "name" : "hegerdes",
     "url" : "https://henrikgerdes.me/"
   },
   "repository": "github:hegerdes/joplin-plugin-remote-note-pull",
