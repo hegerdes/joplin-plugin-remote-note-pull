@@ -1,0 +1,12 @@
+name: 'Close stale issues and PR'
+on:
+  schedule:
+    - cron: '30 6 */2 * *'
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    uses: hegerdes/publish/.github/workflows/reusable-gh-stale.yml@main
