@@ -5,7 +5,7 @@ on:
       - "v*"
 
 env:
-  NODE_VERSION: 18
+  NODE_VERSION: 18.x
 
 jobs:
   release:
