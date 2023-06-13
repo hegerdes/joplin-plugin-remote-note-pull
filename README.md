@@ -9,7 +9,7 @@ This way you can always work with the latest version of online cheat sheets/webs
 
 ## Install
 **Official:**
-Joplin has a community store with an integrated browser for plugin. This plugin is **not** yet released there. It will be added when its in a stable state. Just search for `remote-note-pull`.
+Joplin has a community store with an integrated browser for plugin. This plugin is now also released there. Just search for `remote-note-pull`.
 
 **Manual:**
 You can get the latest version like this:
