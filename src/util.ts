@@ -126,3 +126,7 @@ export const isValidUrl = (urlString: string): boolean => {
     return false;
   }
 };
+
+export const sleep = (sek: number) => {
+  return new Promise(resolve => setTimeout(resolve, sek * 1000));
+}

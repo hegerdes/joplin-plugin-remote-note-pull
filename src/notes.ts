@@ -1,6 +1,6 @@
 import joplin from "api";
 import {http_options, note_marker, owner_repo, sync_note_regex} from "./const";
-import { getAllNotes, isValidUrl, patchMDLinks } from "./util";
+import { getAllNotes, isValidUrl, patchMDLinks, sleep } from "./util";
 import { makeRequest } from "./requests";
 
 const md_pic_links_regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
@@ -49,7 +49,7 @@ export const createTitle = async (body: string): Promise<string> => {
 // Generate body
 export const createBody = async (orgBody: string, url: string): Promise<string> => {
   // add marker and check body for relative links
-  let remote_sync_footer = "\n_" + note_marker + url + "_\n";
+  let remote_sync_footer = "\n*" + note_marker + url + "*\n";
   let body = orgBody + remote_sync_footer;
   let base_url = url.substring(0, url.lastIndexOf("/")) + "/";
   let matches = [];
@@ -70,10 +70,10 @@ export const updateNote = async (note: JoplinNote, batch = false) => {
 
     // Keep in mind that it can be `null` if nothing is currently selected!
     if (note) {
-      console.debug(`Updating note: ${note.id} - ${note.title}`);
       const matches = note.body.match(sync_note_regex);
       if (matches && matches.length > 0 && isValidUrl(note.source_url)) {
-        console.debug(`Trying to update note: ${note.title}`);
+        console.debug(`Updating note: ${note.id} - ${note.title}`);
+        console.debug("Regex matches, tying to update note ", note.title, matches);
         let res = (await makeRequest(note.source_url, http_options)).toString();
         let body = await createBody(res, note.source_url);
 
@@ -85,7 +85,7 @@ export const updateNote = async (note: JoplinNote, batch = false) => {
         if (!batch) alert(`Note ${note.title} updated!`);
       } else {
         console.info("Update Note: Not a sync Note");
-        alert("This is not a RemoteSynced note!");
+        if (!batch) alert("This is not a RemoteSynced note!");
       }
     } else {
       console.warn("NoteUpdate: No note is selected");
@@ -104,11 +104,12 @@ export const updateNotes = async () => {
   const all_notes = await getAllNotes();
 
   // Go through all notes and search for note_marker
+  console.debug(`Will iterate through ${all_notes.size} notes and update every sync note`)
   all_notes.forEach(async (note: JoplinNote, _key: string) => {
-    const matches = note.body.match(sync_note_regex);
-    console.debug("Regex matches for note ", note.title, matches);
-    if (matches) {
-      await updateNote(note, true);
-    }
-  });
+      if(isValidUrl(note.source_url)){
+        await updateNote(note, true);
+        await sleep(5);
+      }
+    });
+    console.debug("Update done")
 };

@@ -47,6 +47,7 @@ export const createSettings = async () => {
   if (await joplin.settings.value("joplin_md_pull_sync_enabled")) {
     joplin_md_pull_sync_interval = setInterval(updateNotes, interval * min_to_ms);
   }
+  console.debug(`Intervall set to ${interval} mins`)
 };
 
 export const createButtons = async () => {
