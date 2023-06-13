@@ -1,4 +1,4 @@
-export const default_sync_interval = 30;
+export const default_sync_interval = 120;
 export const min_to_ms = 60000;
 export const notes_query_limit = 25;
 export const owner_repo = "https://github.com/hegerdes/joplin-plugin-remote-note-pull"
