@@ -1,17 +1,22 @@
 {
   "name": "joplin-plugin-remote-note-pull",
-  "version": "v1.0.2",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "Creates a note from any website (markdown preferred) and periodicity updates the local note with the original website.",
-  "keywords": ["joplin-plugin"],
-  "files": ["publish"],
+  "keywords": [
+    "joplin-plugin"
+  ],
+  "files": [
+    "publish"
+  ],
   "author": {
-    "name" : "hegerdes",
-    "url" : "https://henrikgerdes.me/"
+    "name": "hegerdes",
+    "url": "https://henrikgerdes.me/"
   },
   "repository": "github:hegerdes/joplin-plugin-remote-note-pull",
-  "engines": {"node": ">=14"},
-
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
     "dist-legacy-ssl": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
@@ -34,6 +39,5 @@
     "webpack-cli": "^3.3.11",
     "yargs": "^17.7.x"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
