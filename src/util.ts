@@ -62,7 +62,7 @@ export const getAllNotes = async (): Promise<Map<String, Object>> => {
   data.items.forEach((entry) => notes.set(entry.id, entry));
   while (data.has_more) {
     pageNum++;
-    let data = await joplin.data.get(["notes"], {
+    data = await joplin.data.get(["notes"], {
       fields: query_fields,
       limit: notes_query_limit,
       page: pageNum,
