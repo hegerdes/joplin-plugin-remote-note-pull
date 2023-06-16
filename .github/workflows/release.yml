@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: "${{ env.NODE_VERSION }}"
-        registry-url: 'https://registry.npmjs.org'
+        registry-url: "https://registry.npmjs.org"
 
     - name: Set Version
       run: |
@@ -55,7 +55,7 @@ jobs:
     - name: Create GH release
       uses: softprops/action-gh-release@v1
       with:
-        name: Release ${{ github.ref }}
+        name: Release ${{ github.ref_name }}
         generate_release_notes: true
         prerelease: false
         files: joplin-plugin-remote-note-pull.zip
