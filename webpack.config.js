@@ -33,6 +33,12 @@ const manifest = readManifest(manifestPath);
 const pluginArchiveFilePath = path.resolve(publishDir, `${manifest.id}.jpl`);
 const pluginInfoFilePath = path.resolve(publishDir, `${manifest.id}.json`);
 
+// Sett version in manifest.json
+let manifest_tmp = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+const package_tmp = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+manifest_tmp.version = package_tmp.version;
+fs.writeFileSync(manifestPath, JSON.stringify(manifest_tmp, null,2), 'utf8');
+
 function validatePackageJson() {
 	const content = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 	if (!content.name || content.name.indexOf('joplin-plugin-') !== 0) {

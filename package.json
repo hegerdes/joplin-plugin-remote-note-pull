@@ -1,6 +1,6 @@
 {
   "name": "joplin-plugin-remote-note-pull",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "license": "MIT",
   "description": "Creates a note from any website (markdown preferred) and periodicity updates the local note with the original website.",
   "keywords": [
