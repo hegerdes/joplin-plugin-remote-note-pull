@@ -27,9 +27,6 @@ jobs:
       - name: Install packages
         run: npm install
 
-      - name: Dependency Review
-        uses: actions/dependency-review-action@v2
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
