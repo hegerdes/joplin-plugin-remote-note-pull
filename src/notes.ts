@@ -4,20 +4,20 @@ import { getAllNotes, isValidUrl, patchMDLinks, sleep } from "./util";
 import { makeRequest } from "./requests";
 
 const md_pic_links_regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
-const md_link_regex = /\[([^\[\]]*)\]\((.*?)\)/g;
+const md_link_regex = /\[([^[\]]*)\]\((.*?)\)/g;
 const html_link_regex = /<img [^>]*src="[^"]*"[^>]*>/g;
 
 // Create a new sync note
 export const createNote = async (url: string, notebook: string) => {
   try {
-    let res = (await makeRequest(url, http_options)).toString();
+    const res = (await makeRequest(url, http_options)).toString();
     console.debug("Made web request");
-    let body = await createBody(res, url);
+    const body = await createBody(res, url);
     console.debug("Created Body");
-    let title = await createTitle(res);
+    const title = await createTitle(res);
     console.debug("Created Title");
 
-    let post_res = await joplin.data.post(["notes"], null, {
+    const post_res = await joplin.data.post(["notes"], null, {
       body: body,
       title: title,
       parent_id: notebook,
@@ -37,7 +37,7 @@ export const createNote = async (url: string, notebook: string) => {
 // Generate title
 export const createTitle = async (body: string): Promise<string> => {
   let title = body.split("\n")[0];
-  for (let entry of body.split("\n")) {
+  for (const entry of body.split("\n")) {
     if (entry.startsWith("#")) {
       title = entry.replace(/#/g, "");
       break;
@@ -49,9 +49,9 @@ export const createTitle = async (body: string): Promise<string> => {
 // Generate body
 export const createBody = async (orgBody: string, url: string): Promise<string> => {
   // add marker and check body for relative links
-  let remote_sync_footer = "\n*" + note_marker + url + "*\n";
+  const remote_sync_footer = "\n*" + note_marker + url + "*\n";
   let body = orgBody + remote_sync_footer;
-  let base_url = url.substring(0, url.lastIndexOf("/")) + "/";
+  const base_url = url.substring(0, url.lastIndexOf("/")) + "/";
   let matches = [];
 
   matches = body.match(md_pic_links_regex);
@@ -74,11 +74,11 @@ export const updateNote = async (note: JoplinNote, batch = false) => {
       if (matches && matches.length > 0 && isValidUrl(note.source_url)) {
         console.debug(`Updating note: ${note.id} - ${note.title}`);
         console.debug("Regex matches, tying to update note ", note.title, matches);
-        let res = (await makeRequest(note.source_url, http_options)).toString();
-        let body = await createBody(res, note.source_url);
+        const res = (await makeRequest(note.source_url, http_options)).toString();
+        const body = await createBody(res, note.source_url);
 
         // ToDo: Handle Error when note is gone
-        let post_res = await joplin.data.put(["notes", note.id], null, {
+        const post_res = await joplin.data.put(["notes", note.id], null, {
           body: body,
         });
         console.debug("Updated Note:", post_res);

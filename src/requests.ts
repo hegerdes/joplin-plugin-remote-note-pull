@@ -1,18 +1,18 @@
 import * as http from "https";
 
 // Helper request function
-export const makeRequest = async (url, options = {}) => {
-  return new Promise((resolve, reject) => {
+export const makeRequest = async (url, options = {}): Promise<Buffer> => {
+  return new Promise<Buffer>((resolve, reject) => {
     const req = http.request(url, options, (res) => {
-      let chunks = [];
+      const chunks = [];
 
-      res.on("data", (chunk) => {
+      res.on("data", (chunk: Buffer) => {
         chunks.push(chunk);
       });
       req.on("error", (err) => {
         reject(err);
       });
-      res.on("end", (_chunk) => {
+      res.on("end", (_chunk: Buffer) => {
         resolve(Buffer.concat(chunks));
       });
     });
@@ -21,11 +21,11 @@ export const makeRequest = async (url, options = {}) => {
 };
 
 export async function main(url) {
-  let http_options = {
+  const http_options = {
     method: "GET",
     headers: { "Content-Type": "plain/text" },
   };
-  let res = await makeRequest(url, http_options);
+  const res = await makeRequest(url, http_options);
   console.log(res.toString());
 }
 

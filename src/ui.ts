@@ -13,7 +13,7 @@ let joplin_md_pull_sync_interval: NodeJS.Timer;
 let interval;
 
 export const createSettings = async () => {
-  let notebooks_map = await createNotebookList();
+  const notebooks_map = await createNotebookList();
   await joplin.settings.registerSettings({
     joplin_md_pull_sync_enabled: {
       value: true,
@@ -76,7 +76,7 @@ export const createButtons = async () => {
 // Dialogs
 export const getNoteDialog = async () => {
   if (!newNoteDialog) {
-    let dialogs = joplin.views.dialogs;
+    const dialogs = joplin.views.dialogs;
     newNoteDialog = await dialogs.create("new_note_sync_dialog");
     await setDialogHTML(newNoteDialog);
   }

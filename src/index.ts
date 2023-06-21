@@ -1,5 +1,5 @@
 import joplin from "api";
-import { createNotebookList, registerCommands, setDialogHTML } from "./util";
+import { createNotebookList, registerCommands } from "./util";
 import {
   createButtons,
   createSettings,
@@ -20,7 +20,7 @@ joplin.plugins.register({
     await getNoteDialog();
     console.debug("Dialogs created");
 
-    let notebooks_map = await createNotebookList();
+    const notebooks_map = await createNotebookList();
     console.debug("Fund these notebooks:", notebooks_map);
 
     // When settings change

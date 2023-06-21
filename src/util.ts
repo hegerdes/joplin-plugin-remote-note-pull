@@ -26,7 +26,7 @@ export const setDialogHTML = async (dialog: string) => {
 
 // Get all Notebooks with id and name
 export const createNotebookList = async () => {
-  let folders = await joplin.data.get(["folders"]);
+  const folders = await joplin.data.get(["folders"]);
   return folders.items.reduce(
     (obj, item) => Object.assign(obj, { [item.id]: item.title }),
     {}
@@ -35,7 +35,7 @@ export const createNotebookList = async () => {
 
 // Create HTML options of notebooks
 export const createNotebookFormOptions = async () => {
-  let default_notebook = await joplin.data.get([
+  const default_notebook = await joplin.data.get([
     "folders",
     await joplin.settings.value("joplin_md_pull_default_notebook"),
   ]);
@@ -50,10 +50,10 @@ export const createNotebookFormOptions = async () => {
 };
 
 // Get all notes
-export const getAllNotes = async (): Promise<Map<String, Object>> => {
-  let notes = new Map<string, Object>();
+export const getAllNotes = async (): Promise<Map<string, JoplinNote>> => {
+  const notes = new Map<string, JoplinNote>();
   let pageNum = 1;
-  let query_fields = ["id", "title", "body", "source_url"];
+  const query_fields = ["id", "title", "body", "source_url"];
   let data = await joplin.data.get(["notes"], {
     fields: query_fields,
     limit: notes_query_limit,
@@ -67,7 +67,7 @@ export const getAllNotes = async (): Promise<Map<String, Object>> => {
       limit: notes_query_limit,
       page: pageNum,
     });
-    data.items.forEach((entry) => notes.set(entry.id, entry));
+    data.items.forEach((entry: JoplinNote) => notes.set(entry.id, entry));
   }
   return notes;
 };
@@ -87,7 +87,7 @@ export const registerCommands = async () => {
     execute: async () => {
       const dialog_res = await dialogs.open(await getNoteDialog());
       if (dialog_res.id === "ok") {
-        let form_data = dialog_res.formData.sync_note_form;
+        const form_data = dialog_res.formData.sync_note_form;
         console.info("Submitted form:", form_data);
         // ToDo: Handle http error
         // let url = (DEBUG) ? debug_url : form_data.url
@@ -106,8 +106,8 @@ export const patchMDLinks = (
   stater: string
 ): string => {
   if (matches) {
-    for (let match of matches) {
-      let splitted = match.trim().split(splitter);
+    for (const match of matches) {
+      const splitted = match.trim().split(splitter);
       if (splitted.length == 2 && !splitted[1].startsWith(stater)) {
         payload = payload.replace(
           match,
