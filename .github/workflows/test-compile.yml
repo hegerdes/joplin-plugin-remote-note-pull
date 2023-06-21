@@ -27,6 +27,17 @@ jobs:
       - name: Install packages
         run: npm install
 
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: Run lint
+        run: npm run lint
+
       - name: Test compile
         run: |
           # Running test
