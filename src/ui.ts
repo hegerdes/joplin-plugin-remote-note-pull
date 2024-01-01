@@ -9,7 +9,7 @@ import { createNotebookList, setDialogHTML } from "./util";
 import { updateNotes } from "./notes";
 
 let newNoteDialog;
-let joplin_md_pull_sync_interval: NodeJS.Timer;
+let joplin_md_pull_sync_interval: NodeJS.Timeout;
 let interval;
 
 export const createSettings = async () => {
