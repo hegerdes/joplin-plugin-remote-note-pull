@@ -15,10 +15,10 @@ jobs:
       packages: write
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: "${{ env.NODE_VERSION }}"
         registry-url: "https://registry.npmjs.org"
@@ -37,8 +37,9 @@ jobs:
     - name: Build app
       run: |
         # Running test
-        if [[ "$(node --version)" == "v18"* ]]; then
+        if [[ "$(node --version)" == "v18"* || "$(node --version)" == "v20"* ]]; then
           export NODE_OPTIONS=--openssl-legacy-provider
+          echo HI
         fi
         npm run dist
 

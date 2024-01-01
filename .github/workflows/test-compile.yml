@@ -43,7 +43,7 @@ jobs:
       - name: Test compile
         run: |
           # Running test
-          if [[ "$(node --version)" == "v18"* ]]; then
+          if [[ "$(node --version)" == "v18"* || "$(node --version)" == "v20"* ]]; then
             export NODE_OPTIONS=--openssl-legacy-provider
           fi
           npm run test-compile
