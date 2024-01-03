@@ -13,7 +13,7 @@ Joplin has a community store with an integrated browser for plugin. This plugin 
 
 **Manual:**
 You can get the latest version like this:
- * Download the latest release from [GitHub Releases](https://github.com/hegerdes/joplin-plugin-remote-note-pull/releases)
+ * Download the latest release from [GitHub Releases](https://github.com/hegerdes/joplin-plugin-remote-note-pull/releases) or [npmjs](https://www.npmjs.com/package/joplin-plugin-remote-note-pull)
  * Extract the archive
  * Open Joplin and open the Settings via the Tools/Options menu
  * Go to Plugins
