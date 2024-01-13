@@ -42,7 +42,7 @@ export const createNotebookList = async () => {
     });
     data.items.forEach((entry: JoplinNote) => out.set(entry.id, entry.title));
   }
-  return out;
+  return Object.fromEntries(out);
 };
 
 // Create HTML options of notebooks
