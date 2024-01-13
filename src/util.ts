@@ -26,11 +26,23 @@ export const setDialogHTML = async (dialog: string) => {
 
 // Get all Notebooks with id and name
 export const createNotebookList = async () => {
-  const folders = await joplin.data.get(["folders"]);
-  return folders.items.reduce(
-    (obj, item) => Object.assign(obj, { [item.id]: item.title }),
-    {}
-  );
+  const out = new Map<string, string>();
+  let pageNum = 1;
+  let data = await joplin.data.get(["folders"], {
+    limit: notes_query_limit,
+    page: pageNum,
+  });
+
+  data.items.forEach((entry) => out.set(entry.id, entry.title));
+  while (data.has_more) {
+    pageNum++;
+    data = await joplin.data.get(["folders"], {
+      limit: notes_query_limit,
+      page: pageNum,
+    });
+    data.items.forEach((entry: JoplinNote) => out.set(entry.id, entry.title));
+  }
+  return out;
 };
 
 // Create HTML options of notebooks
