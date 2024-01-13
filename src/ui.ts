@@ -14,6 +14,7 @@ let interval;
 
 export const createSettings = async () => {
   const notebooks_map = await createNotebookList();
+  console.debug("Fund these notebooks:", notebooks_map);
   await joplin.settings.registerSettings({
     joplin_md_pull_sync_enabled: {
       value: true,
