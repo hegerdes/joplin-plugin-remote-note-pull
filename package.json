@@ -23,7 +23,7 @@
     "test-compile": "npm run build",
     "lint": "eslint --ext .ts src ",
     "update": "npm install -g generator-joplin && yo joplin --node-package-manager npm --update --force",
-    "build": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
+    "build": "webpack --env joplin-plugin-config=buildMain && webpack --env joplin-plugin-config=buildExtraScripts && webpack --env joplin-plugin-config=createArchive",
     "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
     "dev-legacy-ssl": "npm run dist-legacy-ssl && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
     "updateVersion": "webpack --env joplin-plugin-config=updateVersion"
