@@ -1,6 +1,6 @@
 {
   "name": "joplin-plugin-remote-note-pull",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "license": "MIT",
   "description": "Creates a note from any website (markdown preferred) and periodicity updates the local note with the original website.",
   "keywords": [
@@ -18,30 +18,32 @@
     "node": ">=14"
   },
   "scripts": {
-    "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
+    "dist": "webpack --env joplin-plugin-config=buildMain && webpack --env joplin-plugin-config=buildExtraScripts && webpack --env joplin-plugin-config=createArchive",
     "dist-legacy-ssl": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
     "test-compile": "npm run build",
     "lint": "eslint --ext .ts src ",
-    "update": "npm install -g generator-joplin && yo joplin --update",
+    "update": "npm install -g generator-joplin && yo joplin --node-package-manager npm --update --force",
     "build": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
     "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
-    "dev-legacy-ssl": "npm run dist-legacy-ssl && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\""
+    "dev-legacy-ssl": "npm run dist-legacy-ssl && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
+    "updateVersion": "webpack --env joplin-plugin-config=updateVersion"
   },
   "devDependencies": {
     "@types/node": "^18.x",
     "@typescript-eslint/eslint-plugin": "^6.18.x",
     "@typescript-eslint/parser": "^6.18.x",
-    "copy-webpack-plugin": "^6.1.0",
+    "copy-webpack-plugin": "^12.0.0",
     "eslint": "^8.43.0",
-    "fs-extra": "^11.1.1",
+    "fs-extra": "^10.1.0",
     "generate-changelog": "^1.8.0",
-    "glob": "^7.1.6",
+    "glob": "^8.0.3",
     "on-build-webpack": "^0.1.0",
-    "tar": "^6.0.5",
-    "ts-loader": "^7.0.5",
+    "tar": "^6.1.11",
+    "ts-loader": "^9.3.1",
     "typescript": "^5.0.4",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "yargs": "^17.7.x"
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "yargs": "^17.7.x",
+    "@joplin/lib": "~2.9"
   }
 }

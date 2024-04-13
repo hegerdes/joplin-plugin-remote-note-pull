@@ -14,58 +14,58 @@ jobs:
       contents: write
       packages: write
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: "${{ env.NODE_VERSION }}"
-        registry-url: "https://registry.npmjs.org"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+          registry-url: "https://registry.npmjs.org"
 
-    - name: Set Version
-      run: |
-        npm version --no-commit-hooks --allow-same-version --no-git-tag-version ${{ github.ref_name }}
-        npm version
+      - name: Set Version
+        run: |
+          npm version --no-commit-hooks --allow-same-version --no-git-tag-version ${{ github.ref_name }}
+          npm version
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run lint
-      run: npm run lint
+      - name: Run lint
+        run: npm run lint
 
-    - name: Build app
-      run: |
-        # Running test
-        if [[ "$(node --version)" == "v18"* || "$(node --version)" == "v20"* ]]; then
-          export NODE_OPTIONS=--openssl-legacy-provider
-          echo HI
-        fi
-        npm run dist
+      - name: Build app
+        run: |
+          # Running test
+          if [[ "$(node --version)" == "v18"* || "$(node --version)" == "v20"* ]]; then
+            export NODE_OPTIONS=--openssl-legacy-provider
+            echo HI
+          fi
+          npm run dist
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: build
-        path: publish
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: publish
 
-    - name: Archive Release
-      uses: thedoctor0/zip-release@0.7.1
-      with:
-        type: zip
-        filename: joplin-plugin-remote-note-pull.zip
-        path: publish
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: zip
+          filename: joplin-plugin-remote-note-pull.zip
+          path: publish
 
-    - name: Create GH release
-      uses: softprops/action-gh-release@v1
-      with:
-        name: Release ${{ github.ref_name }}
-        generate_release_notes: true
-        prerelease: false
-        files: joplin-plugin-remote-note-pull.zip
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GH release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          prerelease: ${{ contains( github.ref_name, 'dev' )}}
+          files: joplin-plugin-remote-note-pull.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Push npm package
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Push npm package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
