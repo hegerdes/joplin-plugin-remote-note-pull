@@ -12,4 +12,4 @@ permissions:
 
 jobs:
   greeting:
-    uses: hegerdes/publish/.github/workflows/reusable-gh-greetings.yml@main
+    uses: hegerdes/helper-suite/.github/workflows/reusable-gh-greetings.yml@main

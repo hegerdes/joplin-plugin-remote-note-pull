@@ -1,7 +1,7 @@
-name: 'Close stale issues and PR'
+name: "Close stale issues and PR"
 on:
   schedule:
-    - cron: '30 6 */2 * *'
+    - cron: "30 6 */2 * *"
 
 permissions:
   issues: write
@@ -9,4 +9,4 @@ permissions:
 
 jobs:
   stale:
-    uses: hegerdes/publish/.github/workflows/reusable-gh-stale.yml@main
+    uses: hegerdes/helper-suite/.github/workflows/reusable-gh-stale.yml@main
