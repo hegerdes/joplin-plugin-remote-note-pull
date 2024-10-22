@@ -22,7 +22,7 @@
     "dist-legacy-ssl": "bash -c \"export NODE_OPTIONS=--openssl-legacy-provider && webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive\"",
     "test-compile": "npm run build",
     "lint": "eslint --ext .ts src ",
-    "update": "npm install -g generator-joplin && yo joplin --node-package-manager npm --update --force",
+    "update": "npm install -g generator-joplin && npx yo joplin --node-package-manager npm --update --force",
     "build": "webpack --env joplin-plugin-config=buildMain && webpack --env joplin-plugin-config=buildExtraScripts && webpack --env joplin-plugin-config=createArchive",
     "dev": "npm run dist && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
     "dev-legacy-ssl": "npm run dist-legacy-ssl && bash -c \"/c/Program\\ Files/Joplin/Joplin.exe --env dev\"",
@@ -41,8 +41,8 @@
     "on-build-webpack": "^0.1.0",
     "tar": "^7.4.3",
     "ts-loader": "^9.3.1",
-    "typescript": "^5.5.4",
-    "webpack": "^5.93.0",
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
     "webpack-cli": "^4.10.0",
     "yargs": "^17.7.x"
   }
