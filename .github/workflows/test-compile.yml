@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ["18", "20"]
+        node-version: ["18", "20", "22"]
 
     steps:
       - name: Checkout Code
@@ -41,7 +41,7 @@ jobs:
         run: npm install
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
 
