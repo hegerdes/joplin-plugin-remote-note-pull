@@ -1,6 +1,6 @@
 # Joplin Plugin Remote Note Pull
 
-[![Plugin Test Build](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/test-compile.yml/badge.svg)](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/test-compile.yml) [![GitHub issues](https://img.shields.io/github/issues/hegerdes/joplin-plugin-remote-note-pull.svg)](https://GitHub.com/hegerdes/joplin-plugin-remote-note-pull/issues/) [![GitHub release](https://img.shields.io/github/release/hegerdes/joplin-plugin-remote-note-pull.svg)](https://GitHub.com/hegerdes/joplin-plugin-remote-note-pull/releases/)
+[![Plugin Test Build](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/test.yml/badge.svg)](https://github.com/hegerdes/joplin-plugin-remote-note-pull/actions/workflows/test-compile.yml) [![GitHub issues](https://img.shields.io/github/issues/hegerdes/joplin-plugin-remote-note-pull.svg)](https://GitHub.com/hegerdes/joplin-plugin-remote-note-pull/issues/) [![GitHub release](https://img.shields.io/github/release/hegerdes/joplin-plugin-remote-note-pull.svg)](https://GitHub.com/hegerdes/joplin-plugin-remote-note-pull/releases/)
 
 This [Joplin](https://github.com/laurent22/joplin) plugin allows websites to be saved as notes and updated periodically based on the original website URL.
 
