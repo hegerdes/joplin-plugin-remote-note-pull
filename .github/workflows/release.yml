@@ -5,20 +5,22 @@ on:
       - "v*"
 
 env:
-  NODE_VERSION: 18.x
+  NODE_VERSION: 22.x
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: write
       packages: write
+      id-token: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "${{ env.NODE_VERSION }}"
           registry-url: "https://registry.npmjs.org"
@@ -38,13 +40,13 @@ jobs:
         run: npm run dist
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: build
           path: publish
 
       - name: Archive Release
-        uses: thedoctor0/zip-release@0.7.1
+        uses: thedoctor0/zip-release@0.7.6
         with:
           type: zip
           filename: joplin-plugin-remote-note-pull.zip
