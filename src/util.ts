@@ -20,7 +20,7 @@ export const setDialogHTML = async (dialog: string) => {
         ${await createNotebookFormOptions()}
         </select>
         </form>
-    `
+    `,
   );
 };
 
@@ -115,7 +115,7 @@ export const patchMDLinks = (
   base_url: string,
   matches: string[],
   splitter: string,
-  stater: string
+  stater: string,
 ): string => {
   if (matches) {
     for (const match of matches) {
@@ -123,7 +123,7 @@ export const patchMDLinks = (
       if (splitted.length == 2 && !splitted[1].startsWith(stater)) {
         payload = payload.replace(
           match,
-          splitted[0] + splitter + base_url + splitted[1]
+          splitted[0] + splitter + base_url + splitted[1],
         );
       }
     }
@@ -134,11 +134,12 @@ export const patchMDLinks = (
 export const isValidUrl = (urlString: string): boolean => {
   try {
     return Boolean(new URL(urlString));
-  } catch (e) {
+  } catch (_e) {
+    console.warn("The provided url is not valid", urlString);
     return false;
   }
 };
 
 export const sleep = (sek: number) => {
-  return new Promise(resolve => setTimeout(resolve, sek * 1000));
-}
+  return new Promise((resolve) => setTimeout(resolve, sek * 1000));
+};
