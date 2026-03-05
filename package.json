@@ -36,7 +36,7 @@
     "@types/node": "^22.x",
     "@typescript-eslint/eslint-plugin": "^8.x",
     "@typescript-eslint/parser": "^8.x",
-    "copy-webpack-plugin": "^13.0.1",
+    "copy-webpack-plugin": "^14.0.0",
     "eslint": "^9.39.2",
     "fs-extra": "^11.3.3",
     "generate-changelog": "^1.8.0",
